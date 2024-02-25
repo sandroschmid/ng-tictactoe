@@ -1,0 +1,11 @@
+<button
+    [disabled]="hasBeenPlayed || !playing"
+    [attr.data-row]="gridPosition.row"
+    [attr.data-col]="gridPosition.col"
+    [attr.data-winner]="isWinningField"
+    (click)="onClick()"
+>
+  @if (value !== '') {
+    <app-player [value]="player(value)" />
+  }
+</button>

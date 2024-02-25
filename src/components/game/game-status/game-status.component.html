@@ -1,0 +1,16 @@
+<div class="game-status">
+  @if (winner === 'draw') {
+    <p>Nobody won 😔</p>
+  } @else if (winner) {
+    <p>
+      <app-player [value]="winner" />
+      is victorious! 🎉
+    </p>
+  } @else {
+    <p>
+      <app-player [value]="currentPlayer" />
+      make your move!
+    </p>
+  }
+  <button [class.invisible]="!winner" (click)="onRestart()">Restart</button>
+</div>

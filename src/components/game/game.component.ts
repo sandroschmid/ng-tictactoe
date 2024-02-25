@@ -1,6 +1,7 @@
+import { FieldComponent } from '@/components/game/field/field.component';
+import { GameStatusComponent } from '@/components/game/game-status/game-status.component';
 import { PlayerComponent } from '@/components/game/player.component';
 import { GameService } from '@/services/game.service';
-import type { FieldValue, PlayerValue } from '@/utils/types';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
@@ -8,6 +9,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   standalone: true,
   imports: [
     PlayerComponent,
+    FieldComponent,
+    GameStatusComponent,
   ],
   templateUrl: './game.component.html',
   styleUrl: './game.component.css',
@@ -17,40 +20,20 @@ export class GameComponent {
 
   readonly fields = this.gameService.getFields();
   readonly currentPlayer = this.gameService.currentPlayer;
-  readonly winningFields = this.gameService.winningFields;
   readonly winner = this.gameService.winner;
 
   constructor(private readonly gameService: GameService) {
   }
 
-  get status() {
-    return this.winner() ? 'done' : 'playing';
+  get isPlaying() {
+    return !this.winner();
   }
 
-  getRow(index: number) {
-    return this.gameService.getGridIndex(index).row;
-  }
-
-  getCol(index: number) {
-    return this.gameService.getGridIndex(index).col;
-  }
-
-  isWinningField(index: number) {
-    return this.winningFields().includes(index);
-  }
-
-  onClick(index: number) {
+  onPlay(index: number) {
     this.gameService.playField(index);
   }
 
-  player(field: FieldValue): PlayerValue {
-    if (field === '') {
-      throw new Error('not a player');
-    }
-    return field as PlayerValue;
-  }
-
-  restart() {
+  onRestart() {
     this.gameService.restart();
   }
 }
