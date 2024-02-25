@@ -1,0 +1,37 @@
+<div class="game" [attr.data-status]="status">
+  <div class="grid">
+    @for (field of fields(); track $index) {
+      <button
+          class="cell"
+          [disabled]="field !== '' || winner()"
+          [attr.data-row]="getRow($index)"
+          [attr.data-col]="getCol($index)"
+          [attr.data-win]="isWinningField($index) && winner()"
+          (click)="onClick($index)"
+      >
+        @if (field !== '') {
+          <app-player [value]="player(field)" />
+        }
+      </button>
+    }
+  </div>
+
+  <div class="game-status">
+    @if (winner(); as winner) {
+      @if (winner === 'draw') {
+        <p>Nobody won 😔</p>
+      } @else {
+        <p>
+          <app-player [value]="winner" />
+          is victorious! 🎉
+        </p>
+      }
+    } @else {
+      <p>
+        <app-player [value]="currentPlayer()" />
+        make your move!
+      </p>
+    }
+    <button [class.invisible]="!winner()" (click)="restart()">Restart</button>
+  </div>
+</div>

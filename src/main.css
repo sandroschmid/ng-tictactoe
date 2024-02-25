@@ -1,0 +1,91 @@
+@import "@fontsource/inter/400.css";
+
+@layer global {
+  :root {
+    --color-bg: hsl(210, 80%, 85%);
+    --color-surface: hsl(210, 80%, 75%);
+    --color-surface-player-x: hsl(132, 100%, 75%);
+    --color-surface-player-o: hsl(319, 100%, 75%);
+    --color-text: hsl(210, 80%, 10%);
+    --color-text-muted: hsl(210, 20%, 60%);
+    --color-focus: hsl(210, 80%, 60%);
+    --border-radius: 0.5rem;
+    --text-padding: 0.1rem 0.4rem;
+    --transition-duration: 200s;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-bg: hsl(210, 80%, 15%);
+      --color-surface: hsl(210, 80%, 25%);
+      --color-surface-player-x: hsl(132, 100%, 25%);
+      --color-surface-player-o: hsl(319, 100%, 25%);
+      --color-text: hsl(210, 80%, 90%);
+      --color-text-muted: hsl(210, 20%, 40%);
+      --color-focus: hsl(210, 80%, 40%);
+    }
+  }
+
+  @media (prefers-reduced-motion) {
+    :root {
+      --transition-duration: 0s;
+    }
+  }
+
+  html,
+  body {
+    min-height: 100svh;
+    margin: 0;
+    padding: 0;
+    font-family: Inter, sans-serif;
+    font-size: 22px;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    color-scheme: dark;
+    user-select: none;
+  }
+
+  h1,
+  p {
+    margin: 0;
+  }
+
+  em {
+    display: inline-block;
+    padding: 0.1rem 0.4rem;
+    font-style: normal;
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    border-radius: 0.5rem;
+  }
+
+  button {
+    padding: 0.25rem 1rem;
+    font-size: 1rem;
+    background-color: var(--color-surface);
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    transition: background var(--transition-duration) outline var(--transition-duration) opacity var(--transition-duration);
+
+    &:not(:disabled) {
+      &:hover {
+        background: var(--color-focus);
+        cursor: pointer;
+      }
+
+      &:is(:focus-visible) {
+        outline: 2px solid var(--color-focus);
+        z-index: 1;
+      }
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  .invisible {
+    visibility: hidden;
+  }
+}

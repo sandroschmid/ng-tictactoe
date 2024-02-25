@@ -1,0 +1,32 @@
+:host {
+  display: contents;
+}
+
+.app {
+  min-height: 100svh;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  text-align: center;
+}
+
+header,
+main {
+  padding: 2rem;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+footer {
+  padding: 0.5rem;
+  font-size: small;
+  color: var(--color-text-muted);
+  text-align: center;
+}

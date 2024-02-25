@@ -1,0 +1,76 @@
+:host,
+.game {
+  display: contents;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 3rem);
+  grid-template-rows: repeat(3, 3rem);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-surface);
+}
+
+.cell {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0 solid var(--color-surface);
+  border-radius: 0;
+  background: transparent;
+  z-index: 0;
+
+  &[data-row="0"][data-col="0"] {
+    border-top-left-radius: var(--border-radius);
+  }
+
+  &[data-row="0"][data-col="2"] {
+    border-top-right-radius: var(--border-radius);
+  }
+
+  &[data-row="2"][data-col="0"] {
+    border-bottom-left-radius: var(--border-radius);
+  }
+
+  &[data-row="2"][data-col="2"] {
+    border-bottom-right-radius: var(--border-radius);
+  }
+
+  &:not([data-col="2"]) {
+    border-right-width: 1px;
+  }
+
+  &:not([data-row="2"]) {
+    border-bottom-width: 1px;
+  }
+
+  &:not(:disabled) {
+    &:is(:focus, :focus-visible, :focus-within) {
+      z-index: 1;
+    }
+  }
+}
+
+.game[data-status="done"] {
+  .cell[data-win="false"]:after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--color-bg);
+    opacity: 0.6;
+  }
+}
+
+.game-status {
+  display: flex;
+  flex-flow: column;
+  gap: 1rem;
+
+  p {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
